@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <style>
+
+      .ta { background-color: skyblue;}
+
+    </style>
+    <title>Page Title</title>
+ 
+    
+    <link href="bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="bootstrap.min.js"></script>
+ 
+   <center> <h1>Registered Refugees</h1></center>
+ </head>
+ <body>
+<center>
+  <button><a href ="index.html">Home</a></button>
+  <button><a href ="registerRefugee.html">Registration</a></button>
+  
+  <button><a href ="Refugee.html">Total Refugees</a></button>
+
+<button><a href ="received.html">Delivered items</a></button>
+
+ </center>
+
+ <br/>
+ <div  class ="table-reponsive">
+ 
+ <table class ="table table-bordered">
+  <thead>
+  <tr class ="ta">
+ 
+      <th> First name </th>
+      <th> Second name </th>
+      <th> Age </th>
+      <th> Country </th>
+      <th> Camp </th>
+      <th> Language </th>
+      <th> Relief </th>
+      <th> item code </th>
+      <th> Assigned agent </th>
+     
+ </tr>
+ 
+ </thead>
+ 
+ 
+ 
+ 
+ 
+ <tbody id ="me">
+ 
+    
+ 
+ </tbody>
+ 
+ 
+ 
+ </table>
+ 
+ </div>
+
+
+
+
+
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  import { getDatabase, ref, set, child, update, remove, get} 
+  from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+
+  import {
+    getFirestore, collection, getDocs,onSnapshot,
+    addDoc , deleteDoc, doc
+  }from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+
+
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCf2zaiNcwrEkc6cytF-VRaZigFA-cheO0",
+    authDomain: "r-rita-2abda.firebaseapp.com",
+    databaseURL: "https://r-rita-2abda-default-rtdb.firebaseio.com",
+    projectId: "r-rita-2abda",
+    storageBucket: "r-rita-2abda.appspot.com",
+    messagingSenderId: "62515634953",
+    appId: "1:62515634953:web:b915168dab6bb495fa29d8"
+  }
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  
+
+ 
+
+  const dbRef = ref(getDatabase());
+get(child(dbRef, `refugeeDetails/`)).then((snapshot) => {
+
+    console.log(snapshot.val());
+    
+    var students =[];
+    snapshot.forEach(childsnapshot=>{
+      students.push(snapshot.val())
+    })
+  
+    //console.log(JSON.stringify(students));
+
+    var stud =students[1]
+ 
+
+    var result = [];
+     
+    
+
+for(var i in stud)
+    result.push([i, stud [i]]);
+    
+    //console.log(JSON.stringify(result));
+    var count =result.length-1;
+    // alert(count);
+
+
+    for (let i = 0; i < result.length; i++) {
+        result[i][1]
+
+        //console.log(JSON.stringify(result[i][1].fname +" " +result[i][1].sname+" " + result[i][1].relief +" " + result[i][1].sname));
+        //console.log(JSON.stringify(result[i][1].age));
+        
+        var vfname= result[i][1].fname.replace(/^"(.+(?="$))"$/, '$1');
+        var vsname= result[i][1].sname.replace(/^"(.+(?="$))"$/, '$1');
+        var vage= result[i][1].age.replace(/^"(.+(?="$))"$/, '$1');
+        var vcountry= result[i][1].country.replace(/^"(.+(?="$))"$/, '$1');
+        var vcamp= result[i][1].camp.replace(/^"(.+(?="$))"$/, '$1');
+        var vlang= result[i][1].lang.replace(/^"(.+(?="$))"$/, '$1');
+        var vrelief= result[i][1].relief.replace(/^"(.+(?="$))"$/, '$1');
+        var vcode= result[i][1].code.replace(/^"(.+(?="$))"$/, '$1');
+        var vagent= result[i][1].agent.replace(/^"(.+(?="$))"$/, '$1');
+        //console.log(namer);
+
+    
+
+
+     
+
+    //document.getElementById('myData').innerHTML =book[5].name+ book[5].title;
+// creating all cells
+for (var k = 0; k < result.length-count; k++) {
+    // creates a table row
+    var row = document.createElement("tr");
+
+      // Create a <td> element and a text node, make the text
+      // node the contents of the <td>, and put the <td> at
+      // the end of the table row
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vfname);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vsname);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+
+
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vage);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vcountry);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vcamp);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+    
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vlang);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+    
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vrelief);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vcode);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+
+
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(vagent);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      var tbody = document.getElementById('me')
+
+      tbody.appendChild(row);
+    
+
+  }
+
+}
+    
+
+      /*
+  
+      document.getElementById('id').innerHTML =book[i].id;
+
+        document.getElementById('name').innerHTML =book[i].name;
+
+        document.getElementById('title').innerHTML =book[i].title;
+
+        document.getElementById('edit').innerHTML ="Edit";
+
+        document.getElementById('delete').innerHTML ="Delete";
+       // console.log(xs[i])
+
+        //document.write("<div>" +book[i].id+"........" + book[i].name +" .........."+ book[i].title +"</div>");
+   
+   */
+    //...............display all values.................
+
+
+
+
+    //.........................................
+
+   
+
+
+  });
+
+  
+    
+
+// Attach an asynchronous callback to read the data at our posts reference
+
+  
+
+</script>
+
+</body>
+  
+</html>

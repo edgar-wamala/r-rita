@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Page Title</title>
+</head>
+<body>
+   <link href="bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <script src="bootstrap/3.1.0/js/bootstrap.min.js"></script>
+   <script src="jquery-1.11.1.min.js"></script>
+   <!-- Include the above in your HEAD tag -->
+   <br/>
+   
+
+<center>
+    <button><a href ="index.html">Home</a></button>
+   <button><a href ="registerRefugee.html">Registration</a></button>
+  
+  <button><a href ="Refugee.html">Total Refugees</a></button>
+
+<button><a href ="received.html">delivered items</a></button>
+</center>
+
+  
+   <br/>
+   <div class="container">
+       <div class="row">
+           <div class="col-md-6 col-md-offset-3">
+               <div class="well well-sm">
+                   <div class="form-horizontal">
+                       <fieldset>
+                           <legend class="text-center">Refugee Registration form</legend>
+                          
+                           <!-- first name-->
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">First Name</label>
+                               <div class="col-md-9">
+                                   <input name="fname" type="text" placeholder="First Name" class="form-control" id ="fname" autocomplete="off" autocomplete>
+                               </div>
+                           </div>
+
+
+                            <!-- second name-->
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">Seconde Name</label>
+                               <div class="col-md-9">
+                                   <input  name="sname" type="text" placeholder="Seconde Name" class="form-control" id ="sname" autocomplete="off" autocomplete>
+                               </div>
+                           </div>
+
+
+                           
+                           <!-- age-->
+                             <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">Age</label>
+                               <div class="col-md-9">
+                                   <input  name="age" type="text" placeholder="age" class="form-control" id ="age">
+                               </div>
+                           </div>
+
+
+                           <!-- country-->
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">Country</label>
+                               <div class="col-md-9">
+                                   <input id="country" name="country" type="text" placeholder="country" class="form-control">
+                               </div>
+                           </div>
+
+                       <!-- Camp name-->
+                             <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">Camp name</label>
+                               <div class="col-md-9">
+                                   <input  name="camp" type="text" placeholder="camp" class="form-control" id ="camp">
+                               </div>
+                           </div>
+                                
+                          <!-- language-->
+                          <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">Language(s) spoken</label>
+                               <div class="col-md-9">
+                                   <input name="lang" type="text" placeholder="language" class="form-control" id ="lang">
+                               </div>
+                           </div>
+
+                              
+
+                           <!-- language-->
+                          <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">Item code</label>
+                               <div class="col-md-9">
+                                   <input name="code" type="text" placeholder="code" class="form-control" id ="code">
+                               </div>
+                           </div>
+
+
+                           <!-- relief -->
+                          <div class="form-group">
+                               <label class="col-md-3 control-label" for="name">Relief type</label>
+                               <div class="col-md-9">
+                                   <input name="relief" type="text" placeholder="relief" class="form-control"  id ="relief">
+                               </div>
+                           </div>
+
+
+                           
+                           
+                          <!-- agent -->
+                          <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">Agent</label>
+                            <div class="col-md-9">
+                                <input name="agent" type="text" placeholder="Agent name" class="form-control" id ="agent">
+                            </div>
+                        </div>
+
+
+
+                        
+                           <!-- Form actions -->
+                           <div class="form-group">
+                               <div class="col-md-12 text-right">
+                                   <button type="submit" name="save" class="btn btn-primary btn-lg" id ="save">Save</button>
+                               </div>
+                           </div>
+                       </fieldset>
+
+                    </div>
+
+               </div>
+           </div>
+       </div>
+   </div>
+
+
+
+
+   
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    import { getDatabase, ref, set, child, update, remove, get} 
+    from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCf2zaiNcwrEkc6cytF-VRaZigFA-cheO0",
+      authDomain: "r-rita-2abda.firebaseapp.com",
+      databaseURL: "https://r-rita-2abda-default-rtdb.firebaseio.com",
+      projectId: "r-rita-2abda",
+      storageBucket: "r-rita-2abda.appspot.com",
+      messagingSenderId: "62515634953",
+      appId: "1:62515634953:web:b915168dab6bb495fa29d8"
+    }
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  
+    
+  
+  
+      const db = getDatabase();
+
+      function saved(){
+            
+              var fname = document.getElementById('fname').value
+              var sname = document.getElementById('sname').value
+  
+               var age = document.getElementById('age').value
+               var country = document.getElementById('country').value
+               var camp = document.getElementById('camp').value
+            
+               var code = document.getElementById('code').value
+               var lang = document.getElementById('lang').value
+
+               var relief = document.getElementById('relief').value
+
+               var agent = document.getElementById('agent').value
+            
+               var save =  document.getElementById('save')
+  
+               //var select =  document.getElementById('select')
+            
+           //.................insert data..........................   
+        
+  
+             set(ref(db, 'refugeeDetails/'+code), {
+              
+             "fname": fname,
+             "sname": sname,
+             "age": age,
+             "country": country,
+             "camp": camp,
+             "lang": lang,
+             "code": code,
+             "relief": relief,
+             "agent": agent,
+  
+  
+             });
+
+             alert("Submitted successfully");
+
+  
+         }
+       
+         //................select data.......................
+  
+         /*
+  
+         function selectd(){
+  
+          const refd = ref(db);
+          
+          get(child(refd, "student/"+ age.value)).then((snapshot)=>{
+        
+        //  if(snapshot.exist()){
+  
+            alert(snapshot.val().Age)
+  
+            alert("yes bro");
+            
+  
+         // }
+          
+          //else {alert(alert("no data found"))}
+  
+          })
+  
+          .catch((error)=>{
+  
+            alert("failed", error);
+          })
+  
+         }
+  
+  
+    */
+  //................event handler................
+    save.addEventListener('click', saved);
+  
+   // select.addEventListener('click', selectd);
+  
+    // .....................selectdata................................
+  
+    
+  
+  
+  
+  // Attach an asynchronous callback to read the data at our posts reference
+  
+    
+  
+  </script>
+
+
+
+</body>
+</html>
