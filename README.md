@@ -15,7 +15,7 @@ r-rita means: Refugee Relief, Information, Tracking and Accountability
    To run the code inside this folder, you need to download it and place it in any desired location on your machine/PC.
    Then after open the folder and run the index.html file by clicking on it to open in a browser. From that point, you can start
     performing actions such as register refugees, viewing delivered items and so on.
- Alternatively you can place the folder inside any server forexample xampp or apache server or any other server and run it as shown below below.
+ Alternatively you can place the folder inside any server forexample xampp or apache server or any other server and run it as shown below.
  localhost/r-ritaWeb.
 
   # r-ritaSMS.zip
